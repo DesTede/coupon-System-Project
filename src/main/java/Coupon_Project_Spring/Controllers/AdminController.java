@@ -6,6 +6,7 @@ import Coupon_Project_Spring.Models.Customer;
 import Coupon_Project_Spring.Services.AdminService;
 import Coupon_Project_Spring.Services.ClientService;
 import Coupon_Project_Spring.Services.CompanyService;
+import com.auth0.jwt.JWT;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,57 +28,57 @@ public class AdminController{
         this.tokenStore = tokenStore;
     }
     
-    @GetMapping("/companies")
+    @GetMapping("/getCompanies")
     public List<Company> getAllCompanies() throws UnAuthorizedException {
         return getService().getAllCompanies();
     }
     
-    @GetMapping("/companies/{id}")
+    @GetMapping("/getCompany/{id}")
     public Company getOneCompany(@PathVariable int id) throws CompanyNotFoundException, UnAuthorizedException {
         return getService().getOneCompany(id);
     }
     
-    @GetMapping("/customers")
+    @GetMapping("/getCustomers")
     public List<Customer> getAllCustomers() throws UnAuthorizedException {
         return getService().getAllCustomers();
     }
     
-    @GetMapping("/customers/{id}")
+    @GetMapping("/getCustomer/{id}")
     public Customer getOneCustomer(@PathVariable int id) throws CustomerNotFoundException, UnAuthorizedException {
         return getService().getOneCustomer(id);
     }
     
-    @PostMapping("/companies")
+    @PostMapping("/addCompany")
     public ResponseEntity<String> addCompany(@RequestBody Company company) throws CompanyAlreadyExistsException, UnAuthorizedException {
         getService().addCompany(company);
         return ResponseEntity.status(HttpStatus.CREATED).body("Company added");
     }
     
-    @PostMapping("/customers")
+    @PostMapping("/addCustomer")
     public ResponseEntity<String> addCustomer(@RequestBody Customer customer) throws CustomerAlreadyExistsException , UnAuthorizedException {
         getService().addCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body("Customer added");
     }
     
-    @PutMapping("/companies")
+    @PutMapping("/updateCompany")
     public ResponseEntity<String> updateCompany(@RequestBody Company company) throws CompanyNotFoundException , UnAuthorizedException {
         getService().updateCompany(company);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Company updated");
     }
     
-    @PutMapping("/customers")
+    @PutMapping("/updateCustomer")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException , UnAuthorizedException {
         getService().updateCustomer(customer);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Customer updated");
     }
     
-    @DeleteMapping("/companies/{id}")
+    @DeleteMapping("/deleteCompany/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable int id) throws CompanyNotFoundException, UnAuthorizedException {
         getService().deleteCompany(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Company deleted");
     }
     
-    @DeleteMapping("/customers/{id}")
+    @DeleteMapping("/deleteCustomer/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable int id) throws CustomerNotFoundException, UnAuthorizedException {
         getService().deleteCustomer(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Customer deleted");
@@ -86,9 +87,11 @@ public class AdminController{
     private AdminService getService() throws UnAuthorizedException {
         String token = request.getHeader("Authorization").replace("Bearer ", "");
         AdminService service = (AdminService) tokenStore.get(token);
-        if (service == null)
-            throw new UnAuthorizedException("Service is null");
+        if (service == null) {
+            throw new UnAuthorizedException("service is null for token: " + token);
+        }
         return service;
     }
+    
 }
     

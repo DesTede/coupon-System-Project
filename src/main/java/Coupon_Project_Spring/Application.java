@@ -32,6 +32,7 @@ public class Application{
     // will return an object that should be registered as a bean in the Spring application context.
     // by default, the bean is a singleton.
     // bean needs to be in a configuration class, or in a class annotated with @Component.
+    
     @Bean 
     public HashMap<String, ClientService> tokenStore(){
         return new HashMap<>();

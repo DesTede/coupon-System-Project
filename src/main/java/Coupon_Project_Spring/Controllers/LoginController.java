@@ -48,7 +48,6 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(token);
         }else
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
-            
     }
     
     @PostMapping("/logout")
