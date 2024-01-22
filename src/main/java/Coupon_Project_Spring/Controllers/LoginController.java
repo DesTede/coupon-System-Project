@@ -75,7 +75,7 @@ public class LoginController {
         }
         else if (service instanceof CompanyService){
             Company company = ((CompanyService) service).getCompanyDetails();
-            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
+            Instant expires = Instant.now().plus(30, ChronoUnit.MINUTES);
             token = JWT.create()
                     .withClaim("name",company.getName())
                     .withClaim("id", company.getId())
