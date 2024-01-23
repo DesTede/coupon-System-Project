@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("customer")
+@RequestMapping("/customer")
 //@CrossOrigin
 public class CustomerController {
     
@@ -38,22 +38,22 @@ public class CustomerController {
         return getService().getAllCustomerCoupons();
     }
     
-    @GetMapping("/allCoupons")
+    @GetMapping("/availableCoupons")
     public List<Coupon> getAllCoupons() throws UnAuthorizedException {
         return getService().getAllCoupons();
     }
     
-    @GetMapping("/coupons/category/{category}")
+    @GetMapping("/couponsByCategory/{category}")
     public List<Coupon> getCustomerCouponsByCategory(@PathVariable String category) throws CustomerNotFoundException, UnAuthorizedException {
         return getService().getCouponsByCategory(Category.valueOf(category));
     }
     
-    @GetMapping("/coupons/price/{maximum}")
+    @GetMapping("/couponsByPrice/{maximum}")
     public List<Coupon> getCustomerCouponsByMaxPrice(@PathVariable double maximum) throws CustomerNotFoundException, UnAuthorizedException {
         return getService().getCouponsByMaxPrice(maximum);
     }
     
-    @PostMapping("/purchase")
+    @PostMapping("/purchaseCoupon")
     public ResponseEntity<?> purchaseCoupon(@RequestBody Coupon coupon) throws CouponsOutOfStockException, CouponAlreadyPurchasedException, CouponExpiredException, CustomerNotFoundException, UnAuthorizedException {
         getService().purchaseCoupon(coupon);
         return ResponseEntity.status(HttpStatus.CREATED).body("Coupon purchased");

@@ -44,30 +44,30 @@ public class CompanyController {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body( getService().getOneCoupon(couponId));
     }
     
-    @GetMapping("/coupons/category/{category}")
+    @GetMapping("/couponsByCategory/{category}")
     public List<Coupon> getCompanyCouponsByCategory(@PathVariable String category) throws CompanyNotFoundException, UnAuthorizedException {
         return getService().getCouponsByCategory(Category.valueOf(category));
     }
     
-    @GetMapping("/coupons/price/{maximum}")
+    @GetMapping("/couponsByPrice/{maximum}")
     public List<Coupon> getCompanyCouponsByMaxPrice(@PathVariable double maximum) throws CompanyNotFoundException, UnAuthorizedException {
         
         return getService().getCouponsByMaxPrice(maximum);
     }
  
-    @PostMapping("/coupons")
+    @PostMapping("/addCoupon")
     public ResponseEntity<?> addCoupon(@RequestBody Coupon coupon) throws CompanyNotFoundException, CouponAlreadyExistsException, CouponExpiredException, UnAuthorizedException {
         getService().addCoupon(coupon);
         return ResponseEntity.status(HttpStatus.CREATED).body(coupon);
     }
     
-    @PutMapping("/coupons")
+    @PutMapping("/updateCoupon")
     public ResponseEntity<? > updateCoupon(@RequestBody Coupon coupon) throws CouponNotFoundException, UnAuthorizedException {
         getService().updateCoupon(coupon);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(coupon);
     }
     
-    @DeleteMapping("/coupons/{couponId}")
+    @DeleteMapping("/deleteCoupon/{couponId}")
     public ResponseEntity<String> deleteCoupon(@PathVariable int couponId) throws CompanyNotFoundException, CouponNotFoundException, UnAuthorizedException {
         getService().deleteCoupon(couponId);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Coupon deleted");
