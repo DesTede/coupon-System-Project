@@ -28,57 +28,57 @@ public class AdminController{
         this.tokenStore = tokenStore;
     }
     
-    @GetMapping("/getCompanies")
+    @GetMapping("/getcompanies")
     public List<Company> getAllCompanies() throws UnAuthorizedException {
         return getService().getAllCompanies();
     }
     
-    @GetMapping("/getCompany/{id}")
+    @GetMapping("/getcompany/{id}")
     public Company getOneCompany(@PathVariable int id) throws CompanyNotFoundException, UnAuthorizedException {
         return getService().getOneCompany(id);
     }
     
-    @GetMapping("/getCustomers")
+    @GetMapping("/getcustomers")
     public List<Customer> getAllCustomers() throws UnAuthorizedException {
         return getService().getAllCustomers();
     }
     
-    @GetMapping("/getCustomer/{id}")
+    @GetMapping("/getcustomer/{id}")
     public Customer getOneCustomer(@PathVariable int id) throws CustomerNotFoundException, UnAuthorizedException {
         return getService().getOneCustomer(id);
     }
     
-    @PostMapping("/addCompany")
+    @PostMapping("/addcompany")
     public ResponseEntity<String> addCompany(@RequestBody Company company) throws CompanyAlreadyExistsException, UnAuthorizedException {
         getService().addCompany(company);
         return ResponseEntity.status(HttpStatus.CREATED).body("Company added");
     }
     
-    @PostMapping("/addCustomer")
+    @PostMapping("/addcustomer")
     public ResponseEntity<String> addCustomer(@RequestBody Customer customer) throws CustomerAlreadyExistsException , UnAuthorizedException {
         getService().addCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body("Customer added");
     }
     
-    @PutMapping("/updateCompany")
+    @PutMapping("/updatecompany")
     public ResponseEntity<String> updateCompany(@RequestBody Company company) throws CompanyNotFoundException , UnAuthorizedException {
         getService().updateCompany(company);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Company updated");
     }
     
-    @PutMapping("/updateCustomer")
+    @PutMapping("/updatecustomer")
     public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException , UnAuthorizedException {
         getService().updateCustomer(customer);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Customer updated");
     }
     
-    @DeleteMapping("/deleteCompany/{id}")
+    @DeleteMapping("/deletecompany/{id}")
     public ResponseEntity<String> deleteCompany(@PathVariable int id) throws CompanyNotFoundException, UnAuthorizedException {
         getService().deleteCompany(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Company deleted");
     }
     
-    @DeleteMapping("/deleteCustomer/{id}")
+    @DeleteMapping("/deletecustomer/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable int id) throws CustomerNotFoundException, UnAuthorizedException {
         getService().deleteCustomer(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("Customer deleted");

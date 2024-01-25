@@ -22,7 +22,7 @@ public class TokenFilter extends OncePerRequestFilter {
         String token = request.getHeader("Authorization");
         if (token == null){ // means no token from the client
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
-            response.getWriter().write("You are not authorized to access this resource");
+            response.getWriter().write("You are not authorized to access this resource! token filter error");
         }else{
             token = token.replace("Bearer ", "");
             try {
@@ -39,7 +39,7 @@ public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         List<String> patterns = List.of("/v3/api-docs", "/configuration/", "/swagger", "/webjars",
-                "/auth/login", "/public","/actuator/health");
+                "/auth/login","/auth/logout", "/public","/actuator/health");
         return patterns.stream().anyMatch( p-> request.getRequestURL().toString().contains(p));
     }
 }

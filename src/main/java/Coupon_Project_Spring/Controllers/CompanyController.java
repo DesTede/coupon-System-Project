@@ -39,7 +39,7 @@ public class CompanyController {
         return getService().getAllCompanyCoupons();
     }
     
-    @GetMapping("/coupons/{couponId}")
+    @GetMapping("/coupon/{couponId}")
     public ResponseEntity<Coupon> getOneCoupon(@PathVariable int couponId) throws CompanyNotFoundException, CouponNotFoundException, UnAuthorizedException {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body( getService().getOneCoupon(couponId));
     }

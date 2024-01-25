@@ -54,7 +54,8 @@ public class LoginController {
     public ResponseEntity<?> logout(String token){
         // removes token and the created service from the HashMap 
         if (tokenStore.containsKey(token)) {
-            tokenStore.remove(request.getHeader("Authorization").replace("Bearer ", ""));
+//            tokenStore.remove(request.getHeader("Authorization").replace("Bearer ", ""));
+            tokenStore.remove(token);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Logged out");
         }else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");

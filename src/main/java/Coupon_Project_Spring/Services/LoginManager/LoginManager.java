@@ -53,6 +53,7 @@ public class LoginManager{
                 return company;
             }else 
                 throw new CompanyLoginFailedException();
+            
         } else if (clientType == (ClientType.Customer)) {
             CustomerService customer = context.getBean(CustomerService.class);
             if (customer.login(email, password)) {
