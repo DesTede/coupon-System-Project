@@ -1,9 +1,6 @@
 package Coupon_Project_Spring.Services;
 
-import Coupon_Project_Spring.CustomExceptions.CompanyNotFoundException;
-import Coupon_Project_Spring.CustomExceptions.CouponAlreadyExistsException;
-import Coupon_Project_Spring.CustomExceptions.CouponExpiredException;
-import Coupon_Project_Spring.CustomExceptions.CouponNotFoundException;
+import Coupon_Project_Spring.CustomExceptions.*;
 import Coupon_Project_Spring.Models.Category;
 import Coupon_Project_Spring.Models.Company;
 import Coupon_Project_Spring.Models.Coupon;
@@ -86,7 +83,7 @@ public class CompanyService extends ClientService{
      * @param category - the category of the coupons to be returned.
      * @return a list of the company's coupons by category.
      */
-    public List<Coupon> getCouponsByCategory(Category category) throws CompanyNotFoundException{
+    public List<Coupon> getCouponsByCategory(Category category) throws CompanyNotFoundException, CategoryNotFoundException {
         Company company = getCompanyDetails();
         return company.getCoupons().stream().filter(c->c.getCategory().equals(category)).toList();
     }
@@ -101,6 +98,16 @@ public class CompanyService extends ClientService{
         return company.getCoupons().stream().filter(c->c.getPrice()<= price).toList();
     }
     
+    
+    /**
+     * Returns a list of all the categories in the system.
+     * @return a list of all the categories in the system.
+     */
+    public List<Category> getCategories() {
+        return List.of(Category.values());
+    }
+    
+    
     /**
      * Adds a coupon to the company's coupon list if the coupon is not expired, 
      * the coupon title is not already in use and the coupon's company id matches
@@ -108,7 +115,6 @@ public class CompanyService extends ClientService{
      * @param coupon - coupon to be added to the company
      * @throws CouponAlreadyExistsException - custom exception when a coupon you're trying to add already in the company's coupons.
      */
-
     
     public Coupon addCoupon(Coupon coupon) throws CouponExpiredException, CompanyNotFoundException, CouponAlreadyExistsException {
         Company company = getCompanyDetails();
@@ -159,8 +165,6 @@ public class CompanyService extends ClientService{
         
         updateCoupon(coupon);
         couponRepo.deleteById(couponId);
-        
-        
     }
     
 }

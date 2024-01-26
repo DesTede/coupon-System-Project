@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,14 +46,23 @@ public class CompanyController {
     }
     
     @GetMapping("/couponsByCategory/{category}")
-    public List<Coupon> getCompanyCouponsByCategory(@PathVariable String category) throws CompanyNotFoundException, UnAuthorizedException {
-        return getService().getCouponsByCategory(Category.valueOf(category));
+    public List<Coupon> getCompanyCouponsByCategory(@PathVariable String category) throws CompanyNotFoundException, UnAuthorizedException, CategoryNotFoundException {
+        Category enumCategory = Arrays.stream(Category.values())
+                .filter(c -> c.name().equalsIgnoreCase(category))
+                .findFirst()
+                .orElseThrow(() -> new CategoryNotFoundException("Category not found"));
+
+        return getService().getCouponsByCategory(enumCategory);
     }
     
     @GetMapping("/couponsByPrice/{maximum}")
     public List<Coupon> getCompanyCouponsByMaxPrice(@PathVariable double maximum) throws CompanyNotFoundException, UnAuthorizedException {
-        
         return getService().getCouponsByMaxPrice(maximum);
+    }
+    
+    @GetMapping("categories")
+    public List<Category> getCategories() throws UnAuthorizedException{ 
+        return getService().getCategories();
     }
  
     @PostMapping("/addCoupon")

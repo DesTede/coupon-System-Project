@@ -45,6 +45,7 @@ public class LoginController {
             String token = createToken(service);
             // saving token in the token store
             tokenStore.put(token, service);
+            
             return ResponseEntity.status(HttpStatus.ACCEPTED).body(token);
         }else
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");

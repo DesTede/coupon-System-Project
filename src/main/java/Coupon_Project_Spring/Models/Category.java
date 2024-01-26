@@ -7,6 +7,7 @@ package Coupon_Project_Spring.Models;
 public enum Category {
     Travel, Entertainment, Education, Finance, Insurance, Pets,
     Sports, Beauty, Fashion, Baby, Books, Music, Culinary,  Games, Other
+    
 }
     
 

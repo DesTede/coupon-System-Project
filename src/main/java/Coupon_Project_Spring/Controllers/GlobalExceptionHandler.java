@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @ControllerAdvice
 public class GlobalExceptionHandler{
     
-    @ExceptionHandler({CompanyNotFoundException.class, CouponNotFoundException.class, CustomerNotFoundException.class})
+    @ExceptionHandler({CompanyNotFoundException.class, CouponNotFoundException.class, CustomerNotFoundException.class, CategoryNotFoundException.class, IllegalArgumentException.class})
     public ResponseEntity<String> handleNotFoundException(Exception ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
     }
