@@ -1,9 +1,12 @@
 package Coupon_Project_Spring.Controllers;
 
+import Coupon_Project_Spring.CustomExceptions.CustomerNotFoundException;
+import Coupon_Project_Spring.Models.Category;
 import Coupon_Project_Spring.Models.Coupon;
-import Coupon_Project_Spring.Services.CustomerService;
-import org.springframework.http.ResponseEntity;
+import Coupon_Project_Spring.Services.PublicService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,15 +16,24 @@ import java.util.List;
 @RequestMapping("/public")
 public class PublicController{
     
-    private CustomerService service;
+    private PublicService publicService;
 
-    public PublicController(CustomerService service) {
-        this.service = service;
+    public PublicController(PublicService publicService) {
+        this.publicService = publicService;
     }
 
-    @GetMapping("/getCoupons")
+    @GetMapping("/coupons")
     public List<Coupon> getAllCoupons(){
-        return service.getAllCoupons();
+        return publicService.getAllCoupons();
     }
     
+    @GetMapping("/coupons/price/{price}")
+    public List<Coupon> getCouponsByPrice(@PathVariable double price) throws CustomerNotFoundException {
+        return publicService.getCouponsByPrice(price);
+    }
+    
+    @GetMapping("/coupons/category/{category}")
+    public List<Coupon> getCouponsByCategory(@PathVariable String category) throws CustomerNotFoundException {
+        return publicService.getCouponsByCategory(Category.valueOf(category));
+    }
 }

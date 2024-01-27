@@ -95,5 +95,11 @@ public class Coupon {
     public String getCompanyData(){
         return company.getName() + ", company email: " + company.getEmail();
     }
+    
+    @JsonGetter("customers")
+    public int getCustomersData(){
+        return customers.size();
+    }
 }
+
 

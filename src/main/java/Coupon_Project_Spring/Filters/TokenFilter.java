@@ -19,6 +19,9 @@ import java.util.List;
 public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        if (shouldNotFilter(request))
+            filterChain.doFilter(request, response);
+        
         String token = request.getHeader("Authorization");
         if (token == null){ // means no token from the client
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
@@ -38,8 +41,12 @@ public class TokenFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        List<String> patterns = List.of("/v3/api-docs", "/configuration/", "/swagger", "/webjars",
-                "/auth/login","/auth/logout", "/public","/actuator/health");
+        List<String> patterns = List.of("/v3/api-docs", 
+                "/configuration/", "/swagger", "/webjars",
+                "/auth/login","/auth/logout", "/public/",
+                "/actuator/health", "/public/coupons",
+                "/public/coupons/price/", "/public/coupons/category/ ");
         return patterns.stream().anyMatch( p-> request.getRequestURL().toString().contains(p));
+//        return patterns.stream().anyMatch( p-> request.getRequestURI().startsWith((request.getContextPath()+p)));
     }
 }
