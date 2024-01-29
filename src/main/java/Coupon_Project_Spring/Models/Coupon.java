@@ -1,6 +1,7 @@
 package Coupon_Project_Spring.Models;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -14,7 +15,7 @@ import java.util.Set;
 
 /**
  * this class represents a Spring entity in the system.
- * it contains information about the coupon including id(PK, AI, private setter),
+ * it contains information about the coupon including id (PK, AI, private setter),
  * the company it's associated with, amount in stock, category, title, description, start and end dates
  * its price and a list of customers who purchased it.
  */
@@ -29,6 +30,7 @@ public class Coupon {
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     
     @ManyToOne
     private Company company;
@@ -92,14 +94,51 @@ public class Coupon {
 
 
     @JsonGetter("company")
-    public String getCompanyData(){
+    public  String getCompanyData(){
         return company.getName() + ", company email: " + company.getEmail();
+//        return company;
     }
-    
-    @JsonGetter("customers")
-    public int getCustomersData(){
-        return customers.size();
-    }
+//    
+//    @JsonGetter("customers")
+//    public int getCustomersData(){
+//        return customers.size();
+//    }
 }
+
+//
+//public class CustomDateDeserializer
+//        extends StdDeserializer<Date> {
+//
+//    private static SimpleDateFormat formatter
+//            = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+//
+//    public CustomDateDeserializer() {
+//        this(null);
+//    }
+//
+//    public CustomDateDeserializer(Class<?> vc) {
+//        super(vc);
+//    }
+//
+//    @Override
+//    public Date deserialize(
+//            JsonParser jsonparser, DeserializationContext context)
+//            throws IOException {
+//
+//        String date = jsonparser.getText();
+//        try {
+//            return formatter.parse(date);
+//        } catch (ParseException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//
+//    public class EventWithSerializer {
+//        public String name;
+//
+//        @JsonDeserialize(using = CustomDateDeserializer.class)
+//        public Date eventDate;
+//    }
+
 
 

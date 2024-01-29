@@ -72,7 +72,7 @@ public class CompanyController {
     }
     
     @PutMapping("/updateCoupon")
-    public ResponseEntity<? > updateCoupon(@RequestBody Coupon coupon) throws CouponNotFoundException, UnAuthorizedException {
+    public ResponseEntity<? > updateCoupon(@RequestBody Coupon coupon) throws CouponNotFoundException, UnAuthorizedException, CompanyNotFoundException {
         getService().updateCoupon(coupon);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(coupon);
     }

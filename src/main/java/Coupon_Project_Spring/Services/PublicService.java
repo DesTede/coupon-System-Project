@@ -21,6 +21,10 @@ public class PublicService {
     public List<Coupon> getAllCoupons(){
         return couponRepo.findAll();
     }
+
+    public List<Category> getCategories() {
+        return List.of(Category.values());
+    }
     
     public List<Coupon> getCouponsByPrice(double price){
         return getAllCoupons().stream().filter(c->c.getPrice() <=price).toList();

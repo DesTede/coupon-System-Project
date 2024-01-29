@@ -27,6 +27,11 @@ public class PublicController{
         return publicService.getAllCoupons();
     }
     
+    @GetMapping("/categories")
+    public List<Category> getCategories() {
+        return publicService.getCategories();
+    }
+    
     @GetMapping("/coupons/price/{price}")
     public List<Coupon> getCouponsByPrice(@PathVariable double price) throws CustomerNotFoundException {
         return publicService.getCouponsByPrice(price);

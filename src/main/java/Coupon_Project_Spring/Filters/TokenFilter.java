@@ -19,9 +19,9 @@ import java.util.List;
 public class TokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (shouldNotFilter(request))
-            filterChain.doFilter(request, response);
-        
+//        if (shouldNotFilter(request))
+//            filterChain.doFilter(request, response);
+//        
         String token = request.getHeader("Authorization");
         if (token == null){ // means no token from the client
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

@@ -83,7 +83,7 @@ public class CompanyService extends ClientService{
      * @param category - the category of the coupons to be returned.
      * @return a list of the company's coupons by category.
      */
-    public List<Coupon> getCouponsByCategory(Category category) throws CompanyNotFoundException, CategoryNotFoundException {
+    public List<Coupon> getCouponsByCategory(Category category) throws CompanyNotFoundException{
         Company company = getCompanyDetails();
         return company.getCoupons().stream().filter(c->c.getCategory().equals(category)).toList();
     }
@@ -122,8 +122,9 @@ public class CompanyService extends ClientService{
             throw new CouponExpiredException("The coupon you are trying to add is expired");
         if (company.getCoupons().stream().anyMatch(c->c.getTitle().equals(coupon.getTitle())))
             throw new CouponAlreadyExistsException("Coupon title already exists in company's coupons");
-        if (coupon.getCompany().getId() != companyId)
-            throw new CompanyNotFoundException("Coupon's company id does not match current logged company's id");
+//        if (coupon.getCompany().getId() != companyId)
+//            throw new CompanyNotFoundException("Coupon's company id does not match current logged company's id");
+        coupon.setCompany(company);
         couponRepo.save(coupon);
         return coupon;
     }
@@ -133,8 +134,10 @@ public class CompanyService extends ClientService{
      * @param coupon - the coupon to be updated.
      * @throws CouponNotFoundException - custom exception when a coupon you're trying to update is not in the company's coupons.
      */
-    public Coupon updateCoupon(Coupon coupon) throws CouponNotFoundException{
+    public Coupon updateCoupon(Coupon coupon) throws CouponNotFoundException, CompanyNotFoundException {
+        Company company = getCompanyDetails();
         if (couponRepo.existsById(coupon.getId())) {
+            coupon.setCompany(company);
             couponRepo.save(coupon);
             return coupon;
         }

@@ -1,5 +1,6 @@
 package Coupon_Project_Spring.Models;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -55,5 +56,8 @@ public class Company {
                 ", password: " + password + '\'' +
                 '}';
     }
+    
+    
+    
 }
 
