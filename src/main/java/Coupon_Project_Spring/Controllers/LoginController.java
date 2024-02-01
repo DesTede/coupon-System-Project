@@ -51,23 +51,35 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
     }
     
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(String token){
-        // removes token and the created service from the HashMap 
-        if (tokenStore.containsKey(token)) {
+//    @PostMapping("/logout")
+//    public ResponseEntity<?> logout(String token){
+//        // removes token and the created service from the HashMap 
+//        if (tokenStore.containsKey(token)) {
 //            tokenStore.remove(request.getHeader("Authorization").replace("Bearer ", ""));
+//            tokenStore.remove(token);
+//            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Logged out");
+//        }else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");
+//        }
+//    }
+    
+    @PostMapping("/logout")
+    public ResponseEntity<?> logout(){
+        String token = request.getHeader("Authorization").replace("Bearer ", "");
+        if (!token.isEmpty()) {
             tokenStore.remove(token);
             return ResponseEntity.status(HttpStatus.ACCEPTED).body("Logged out");
-        }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");
         }
+        else 
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");
     }
     
     private String createToken(ClientService service) throws CompanyNotFoundException, CustomerNotFoundException {
         String token = "";
+        
         if (service instanceof AdminService){
 //            Admin admin = ((AdminService) service);
-            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
+            Instant expires = Instant.now().plus(30, ChronoUnit.MINUTES);
             token = JWT.create()
                     .withClaim("name","Admin")
                     .withClaim("clientType", ClientType.Administrator.toString())

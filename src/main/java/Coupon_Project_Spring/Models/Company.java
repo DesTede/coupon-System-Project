@@ -32,7 +32,7 @@ public class Company {
     private String password;
     @OneToMany(mappedBy = "company",fetch = FetchType.EAGER)
     private List<Coupon> coupons;
-
+    
 
     public Company(String name, String email, String password, List<Coupon> coupons) {
         this.name = name;

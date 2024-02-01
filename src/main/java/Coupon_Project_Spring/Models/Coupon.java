@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.boot.jackson.JsonComponent;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -48,7 +50,7 @@ public class Coupon {
     @ManyToMany(mappedBy = "coupons", fetch = FetchType.EAGER)
     private Set<Customer> customers;
 
-    public Coupon(Company company, int amount, Category category, String title, String description, String image, LocalDate startDate, LocalDate endDate, double price) {
+    public Coupon(Company company, int amount, Category category, String title, String description, String image, LocalDate startDate, LocalDate endDate, double price, Set<Customer> customers) {
         this.company = company;
         this.amount = amount;
         this.category = category;
@@ -58,9 +60,22 @@ public class Coupon {
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
+        this.customers = new HashSet<>();
     }
 
-    
+    public Coupon(int amount, Category category, String title, String description, String image, LocalDate startDate, LocalDate endDate, double price, Set<Customer> customers) {
+        this.amount = amount;
+        this.category = category;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.price = price;
+        this.customers = new HashSet<>(); // i want to add here an empty set of customers, so that whenever i create a coupon, it will be created with an empty set of customers
+        
+    }
+
     @Override
     public String toString() {
         return "Coupon{" +
@@ -95,14 +110,16 @@ public class Coupon {
 
     @JsonGetter("company")
     public  String getCompanyData(){
-        return company.getName() + ", company email: " + company.getEmail();
-//        return company;
+        if (company != null)
+            return "name: " + company.getName() + " email: " + company.getEmail();
+        else 
+            return  "No associated company";
     }
-//    
-//    @JsonGetter("customers")
-//    public int getCustomersData(){
-//        return customers.size();
-//    }
+
+    @JsonGetter("customers")
+    public Serializable getCustomersData(){
+        return customers != null? customers.size() : "0";
+    }
 }
 
 //
@@ -120,6 +137,8 @@ public class Coupon {
 //        super(vc);
 //    }
 //
+
+
 //    @Override
 //    public Date deserialize(
 //            JsonParser jsonparser, DeserializationContext context)

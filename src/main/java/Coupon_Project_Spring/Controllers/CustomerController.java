@@ -53,9 +53,15 @@ public class CustomerController {
         return getService().getCouponsByMaxPrice(maximum);
     }
     
-    @PostMapping("/purchaseCoupon")
-    public ResponseEntity<?> purchaseCoupon(@RequestBody Coupon coupon) throws CouponsOutOfStockException, CouponAlreadyPurchasedException, CouponExpiredException, CustomerNotFoundException, UnAuthorizedException {
-        getService().purchaseCoupon(coupon);
+//    @PostMapping("/purchaseCoupon")
+//    public ResponseEntity<?> purchaseCoupon(@RequestBody Coupon coupon) throws CouponsOutOfStockException, CouponAlreadyPurchasedException, CouponExpiredException, CustomerNotFoundException, UnAuthorizedException {
+//        getService().purchaseCoupon(coupon);
+//        return ResponseEntity.status(HttpStatus.CREATED).body("Coupon purchased");
+//    }
+
+    @PostMapping("/purchaseCoupon/{couponId}")
+    public ResponseEntity<?> purchaseCoupon( @PathVariable int couponId) throws CouponsOutOfStockException, CouponAlreadyPurchasedException, CouponExpiredException, CustomerNotFoundException, UnAuthorizedException {
+        getService().purchaseCoupon(couponId);
         return ResponseEntity.status(HttpStatus.CREATED).body("Coupon purchased");
     }
 

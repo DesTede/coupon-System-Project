@@ -24,8 +24,8 @@ public class Application{
     public static void main(String[] args) throws Exception {
         
         ApplicationContext context = SpringApplication.run(Application.class, args);
-        Test test = context.getBean(Test.class);
-        test.testAll();
+//        Test test = context.getBean(Test.class);
+//        test.testAll();
     }
 
     // @Bean annotation tells Spring that a method annotated with @Bean

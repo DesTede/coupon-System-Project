@@ -1,7 +1,14 @@
 package Coupon_Project_Spring.Test;
 
+import Coupon_Project_Spring.Models.Category;
+import Coupon_Project_Spring.Models.Company;
+import Coupon_Project_Spring.Models.Coupon;
+import Coupon_Project_Spring.Services.CompanyService;
+import Coupon_Project_Spring.Services.LoginManager.ClientType;
 import Coupon_Project_Spring.Services.LoginManager.LoginManager;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDate;
 
 /**
  * Test class,a Spring component, covering various aspects of your coupon management system.
@@ -22,7 +29,7 @@ public class Test {
 //        AdminService adminService = (AdminService) loginManager.login("admin@admin.com","admin", ClientType.Administrator);
 //        CompanyService companyService = (CompanyService) loginManager.login("nike@waffel.com", "password", ClientType.Company);
 //        CustomerService customerService = (CustomerService) loginManager.login("eatmyshorts@gmail.com","milhouse",ClientType.Customer);
-
+        
 //        Company company = new Company("JBL","jbl.com","jabal",new ArrayList<>());
 //        Company company1 = new Company("Brooks","b@email.com","brooks");
 
@@ -31,7 +38,7 @@ public class Test {
 //        Customer customer2 = new Customer("Maggie","Simpson","pacifier@gmail.com","pacifier");
 //        Customer customer = new Customer("John","last","gmail","password");`
 //        Company company = companyService.getCompanyDetails();
-//        Coupon coupon = new Coupon(company,1, Category.Books,"science Fiction","Dune","",LocalDate.of(2023,11,14),LocalDate.of(2024,1,29),23.54);
+//        Coupon coupon = new Coupon(11, Category.Books,"science Fiction","Dune","", LocalDate.of(2023,11,14),LocalDate.of(2024,1,29),23.54);
 //        Coupon coupon1 = new Coupon(company,1, Category.Baby,"Washcloth","The Chronic Vinyl Record"," ",LocalDate.of(2023,11,14),LocalDate.of(2024,1,29),25.54);
 //        Coupon coupon2 = new Coupon(company,2,Category.Education,"Full Stack Web","comprehensive Client side course","",LocalDate.of(2023,11,30),LocalDate.of(2024,1,30),13_000);
 
@@ -65,6 +72,7 @@ public class Test {
 //        adminService.deleteCustomer(6);
 
 
+//        companyService.addCoupon(coupon);
 
 //        companyService.addCoupon(coupon);
 //        companyService.addCoupon(coupon1);

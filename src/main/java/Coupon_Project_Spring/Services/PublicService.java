@@ -1,5 +1,6 @@
 package Coupon_Project_Spring.Services;
 
+import Coupon_Project_Spring.CustomExceptions.CouponNotFoundException;
 import Coupon_Project_Spring.Models.Category;
 import Coupon_Project_Spring.Models.Coupon;
 import Coupon_Project_Spring.Repositories.CouponRepository;
@@ -20,6 +21,10 @@ public class PublicService {
 
     public List<Coupon> getAllCoupons(){
         return couponRepo.findAll();
+    }
+    
+    public Coupon getCoupon(int id) throws CouponNotFoundException {
+        return couponRepo.findById(id).orElseThrow(()-> new CouponNotFoundException("Coupon not found"));
     }
 
     public List<Category> getCategories() {
