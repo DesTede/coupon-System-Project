@@ -102,7 +102,7 @@ public class CustomerService extends ClientService{
     /**
      * In this method, the customer can purchase a coupon.
      * The coupon must not be expired, must be in stock and the customer must not have yet purchased it.
-     * @param coupon - the coupon entity to be purchased.
+     * @param couponId - the id number of the coupon entity to be purchased.
      * @throws CouponExpiredException - custom exception when a coupon you're trying to purchase is expired.
      * @throws CouponAlreadyPurchasedException - custom exception when a coupon you're trying to purchase is already purchased.
      * @throws CouponsOutOfStockException - custom exception when a coupon you're trying to purchase is out of stock.
