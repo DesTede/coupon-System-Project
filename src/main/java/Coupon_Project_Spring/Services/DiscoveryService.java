@@ -4,17 +4,16 @@ import Coupon_Project_Spring.CustomExceptions.CouponNotFoundException;
 import Coupon_Project_Spring.Models.Category;
 import Coupon_Project_Spring.Models.Coupon;
 import Coupon_Project_Spring.Repositories.CouponRepository;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PublicService {
+public class DiscoveryService {
     
     private CouponRepository couponRepo;
 
-    public PublicService(CouponRepository couponRepo) {
+    public DiscoveryService(CouponRepository couponRepo) {
         this.couponRepo = couponRepo;
     }
     

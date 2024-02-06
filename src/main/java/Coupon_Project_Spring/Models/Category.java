@@ -5,8 +5,8 @@ package Coupon_Project_Spring.Models;
  * this way we can classify coupons.
  */
 public enum Category {
-    Travel, Entertainment, Education, Finance, Insurance, Pets,
-    Sports, Beauty, Fashion, Baby, Books, Music, Culinary,  Games, Other
+    Others, Travel, Entertainment, Education, Finance, Insurance, Pets,
+    Sports, Beauty, Fashion, Baby, Books, Music, Culinary,  Games
     
 }
     

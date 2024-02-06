@@ -43,9 +43,9 @@ public class TokenFilter extends OncePerRequestFilter {
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         List<String> patterns = List.of("/v3/api-docs", 
                 "/configuration/", "/swagger", "/webjars",
-                "/auth/login","/auth/logout", "/public/",
-                "/actuator/health", "/public/coupons",
-                "/public/coupons/price/", "/public/coupons/category/ ");
+                "/auth/login","/auth/logout", "/discovery/",
+                "/actuator/health", "/discovery/coupons",
+                "/discovery/coupons/price/", "/discovery/coupons/category/ ");
         return patterns.stream().anyMatch( p-> request.getRequestURL().toString().contains(p));
 //        return patterns.stream().anyMatch( p-> request.getRequestURI().startsWith((request.getContextPath()+p)));
     }
