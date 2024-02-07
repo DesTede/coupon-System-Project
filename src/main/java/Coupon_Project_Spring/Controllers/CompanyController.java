@@ -66,13 +66,13 @@ public class CompanyController {
     }
  
     @PostMapping("/addCoupon")
-    public ResponseEntity<?> addCoupon(@RequestBody Coupon coupon) throws CompanyNotFoundException, CouponAlreadyExistsException, CouponExpiredException, UnAuthorizedException {
+    public ResponseEntity<Coupon> addCoupon(@RequestBody Coupon coupon) throws CompanyNotFoundException, CouponAlreadyExistsException, CouponExpiredException, UnAuthorizedException {
         getService().addCoupon(coupon);
         return ResponseEntity.status(HttpStatus.CREATED).body(coupon);
     }
     
     @PutMapping("/updateCoupon")
-    public ResponseEntity<? > updateCoupon(@RequestBody Coupon coupon) throws CouponNotFoundException, UnAuthorizedException, CompanyNotFoundException {
+    public ResponseEntity<Coupon> updateCoupon(@RequestBody Coupon coupon) throws CouponNotFoundException, UnAuthorizedException, CompanyNotFoundException {
         getService().updateCoupon(coupon);
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(coupon);
     }

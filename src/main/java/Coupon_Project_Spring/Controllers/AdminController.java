@@ -49,27 +49,27 @@ public class AdminController{
     }
     
     @PostMapping("/addcompany")
-    public ResponseEntity<String> addCompany(@RequestBody Company company) throws CompanyAlreadyExistsException, UnAuthorizedException {
+    public ResponseEntity<Company> addCompany(@RequestBody Company company) throws CompanyAlreadyExistsException, UnAuthorizedException {
         getService().addCompany(company);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Company added");
+        return ResponseEntity.status(HttpStatus.CREATED).body(company);
     }
     
     @PostMapping("/addcustomer")
-    public ResponseEntity<String> addCustomer(@RequestBody Customer customer) throws CustomerAlreadyExistsException , UnAuthorizedException {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) throws CustomerAlreadyExistsException , UnAuthorizedException {
         getService().addCustomer(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Customer added");
+        return ResponseEntity.status(HttpStatus.CREATED).body(customer);
     }
     
     @PutMapping("/updatecompany")
-    public ResponseEntity<String> updateCompany(@RequestBody Company company) throws CompanyNotFoundException , UnAuthorizedException {
+    public ResponseEntity<Company> updateCompany(@RequestBody Company company) throws CompanyNotFoundException , UnAuthorizedException {
         getService().updateCompany(company);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Company updated");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(company);
     }
     
     @PutMapping("/updatecustomer")
-    public ResponseEntity<String> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException , UnAuthorizedException {
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) throws CustomerNotFoundException , UnAuthorizedException {
         getService().updateCustomer(customer);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Customer updated");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(customer);
     }
     
     @DeleteMapping("/deletecompany/{id}")

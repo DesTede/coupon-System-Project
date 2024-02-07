@@ -79,7 +79,7 @@ public class LoginController {
         
         if (service instanceof AdminService){
 //            Admin admin = ((AdminService) service);
-            Instant expires = Instant.now().plus(30, ChronoUnit.MINUTES);
+            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
             token = JWT.create()
                     .withClaim("name","Admin")
                     .withClaim("clientType", ClientType.Administrator.toString())
@@ -89,7 +89,7 @@ public class LoginController {
         }
         else if (service instanceof CompanyService){
             Company company = ((CompanyService) service).getCompanyDetails();
-            Instant expires = Instant.now().plus(30, ChronoUnit.MINUTES);
+            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
             token = JWT.create()
                     .withClaim("name",company.getName())
                     .withClaim("id", company.getId())
