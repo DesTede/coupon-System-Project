@@ -36,7 +36,7 @@ public class LoginManager{
      * @throws CompanyLoginFailedException if the company login failed.
      
      */
-    public ClientService login(String email, String password, ClientType clientType) throws CustomerLoginFailedException, CompanyLoginFailedException, AdminLoginFailedException, LoginFailedException {
+    public ClientService login(String email, String password, ClientType clientType) throws CustomerLoginFailedException, CompanyLoginFailedException, AdminLoginFailedException, LoginFailedException, CompanyNotFoundException {
         
         if (clientType == (ClientType.Administrator)){
             AdminService admin = context.getBean(AdminService.class);
@@ -49,7 +49,7 @@ public class LoginManager{
         } else if (clientType == (ClientType.Company)) {
             CompanyService company = context.getBean(CompanyService.class);
             if (company.login(email,password)) {
-                System.out.println("Company login successful");
+                System.out.println("Company: " +company.getCompanyDetails().getId() + " login successful");
                 return company;
             }else 
                 throw new CompanyLoginFailedException();

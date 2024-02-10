@@ -78,9 +78,9 @@ public class CompanyController {
     }
     
     @DeleteMapping("/deleteCoupon/{couponId}")
-    public ResponseEntity<String> deleteCoupon(@PathVariable int couponId) throws CompanyNotFoundException, CouponNotFoundException, UnAuthorizedException {
+    public ResponseEntity<?> deleteCoupon(@PathVariable int couponId) throws CompanyNotFoundException, CouponNotFoundException, UnAuthorizedException {
         getService().deleteCoupon(couponId);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body("Coupon deleted");
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(couponId);
     }
     
     private CompanyService getService() throws UnAuthorizedException {
