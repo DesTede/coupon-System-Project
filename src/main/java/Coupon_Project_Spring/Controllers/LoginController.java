@@ -51,17 +51,6 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
     }
     
-//    @PostMapping("/logout")
-//    public ResponseEntity<?> logout(String token){
-//        // removes token and the created service from the HashMap 
-//        if (tokenStore.containsKey(token)) {
-//            tokenStore.remove(request.getHeader("Authorization").replace("Bearer ", ""));
-//            tokenStore.remove(token);
-//            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Logged out");
-//        }else {
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");
-//        }
-//    }
     
     @PostMapping("/logout")
     public ResponseEntity<?> logout(){
@@ -79,7 +68,7 @@ public class LoginController {
         
         if (service instanceof AdminService){
 //            Admin admin = ((AdminService) service);
-            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
+            Instant expires = Instant.now().plus(10, ChronoUnit.MINUTES);
             token = JWT.create()
                     .withClaim("name","Admin")
                     .withClaim("clientType", ClientType.Administrator.toString())
@@ -89,7 +78,7 @@ public class LoginController {
         }
         else if (service instanceof CompanyService){
             Company company = ((CompanyService) service).getCompanyDetails();
-            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
+            Instant expires = Instant.now().plus(10, ChronoUnit.MINUTES);
             token = JWT.create()
                     .withClaim("name",company.getName())
                     .withClaim("id", company.getId())
@@ -101,7 +90,7 @@ public class LoginController {
         }
         else if (service instanceof CustomerService){
             Customer customer = ((CustomerService) service).getCustomerDetails();
-            Instant expires = Instant.now().plus(30, ChronoUnit.SECONDS);
+            Instant expires = Instant.now().plus(10, ChronoUnit.MINUTES);
             token = JWT.create()
                     .withClaim("name",customer.getFirstName() + " " + customer.getLastName())
                     .withClaim("id", customer.getId())

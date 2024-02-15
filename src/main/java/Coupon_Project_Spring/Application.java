@@ -2,7 +2,6 @@ package Coupon_Project_Spring;
 
 
 import Coupon_Project_Spring.Services.ClientService;
-import Coupon_Project_Spring.Test.Test;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -28,7 +27,7 @@ public class Application{
 //        test.testAll();
     }
 
-    // @Bean annotation tells Spring that a method annotated with @Bean
+    // @Bean annotation tells Spring that a method annotated with it
     // will return an object that should be registered as a bean in the Spring application context.
     // by default, the bean is a singleton.
     // bean needs to be in a configuration class, or in a class annotated with @Component.

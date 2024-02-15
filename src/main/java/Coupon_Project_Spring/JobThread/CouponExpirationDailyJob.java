@@ -37,7 +37,7 @@ public class CouponExpirationDailyJob {
      * @Scheduled annotation to ensure that the method runs at fixed intervals.
      */
     @Transactional
-    @Scheduled(fixedRate = 10_000) //1000 * 60 * 60 * 24 - 24 hours)
+    @Scheduled(fixedRate = 1000 * 60 * 60 * 24 )
     public void run() {
         if (!quit) {
             System.out.println("Daily coupon cleanup is now starting");
@@ -57,7 +57,7 @@ public class CouponExpirationDailyJob {
                 if (couponList.isEmpty()){
                     System.out.println("No expired coupons found ");
                 }else 
-                    System.out.println(couponList.size());
+                    System.out.println("Expired CouponList is: " + couponList.size());
                 
             } catch (Exception e){
                 System.out.println("Daily coupon cleanup has been interrupted");
