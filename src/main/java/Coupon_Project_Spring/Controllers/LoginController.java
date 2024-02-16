@@ -23,9 +23,17 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.HashMap;
 
+/**
+ * This class is a RestController that handles the login and logout requests.
+ * It uses the LoginManager to authenticate the user and create a token for the user.
+ */
 @RestController
 @RequestMapping("/auth")
 public class LoginController {
+    
+    /**
+     * defining the fields and injecting them using the constructor
+     */
     private LoginManager loginManager;
     private HashMap<String, ClientService> tokenStore;
     private HttpServletRequest request;
@@ -36,7 +44,23 @@ public class LoginController {
         this.request = request;
     }
     
-    
+    /**
+     * This method handles the login request.
+     * It receives the email, password and clientType from the user and uses the
+     * loginManager to authenticate the user.
+     * If the login is successful, it creates a token for the user and saves 
+     * it in the token store.
+     * @param email the user's email
+     * @param password the user's password
+     * @param clientType the user's client type
+     * @return ResponseEntity with the token if the login is successful, or a message if the login failed.
+     * @throws LoginFailedException the login failed
+     * @throws AdminLoginFailedException the admin login failed
+     * @throws CustomerLoginFailedException the customer login failed
+     * @throws CompanyLoginFailedException the company login failed
+     * @throws CompanyNotFoundException the company not found
+     * @throws CustomerNotFoundException the customer not found
+     */
     @PostMapping ("/login")    
     public ResponseEntity<String> login(String email, String password, ClientType clientType) throws LoginFailedException, AdminLoginFailedException, CustomerLoginFailedException, CompanyLoginFailedException, CompanyNotFoundException, CustomerNotFoundException {
         ClientService service = loginManager.login(email, password, clientType);
@@ -52,6 +76,12 @@ public class LoginController {
     }
     
     
+    /**
+     * This method handles the logout request.
+     * It receives the token from the user and removes it from the token store.
+     * @return ResponseEntity with a message if the logout is successful,
+     * or a message if the token is not found.
+     */
     @PostMapping("/logout")
     public ResponseEntity<?> logout(){
         String token = request.getHeader("Authorization").replace("Bearer ", "");
@@ -63,6 +93,13 @@ public class LoginController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Token not found");
     }
     
+    /**
+     * This method creates a token for the user.
+     * @param service the user's service
+     * @return the token
+     * @throws CompanyNotFoundException if the company not found
+     * @throws CustomerNotFoundException if the customer not found
+     */
     private String createToken(ClientService service) throws CompanyNotFoundException, CustomerNotFoundException {
         String token = "";
         

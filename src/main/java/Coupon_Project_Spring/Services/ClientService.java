@@ -1,6 +1,5 @@
 package Coupon_Project_Spring.Services;
 
-import Coupon_Project_Spring.CustomExceptions.CustomerNotFoundException;
 import Coupon_Project_Spring.Repositories.CompanyRepository;
 import Coupon_Project_Spring.Repositories.CouponRepository;
 import Coupon_Project_Spring.Repositories.CustomerRepository;
