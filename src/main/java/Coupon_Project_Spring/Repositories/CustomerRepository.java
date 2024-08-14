@@ -17,7 +17,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
     /**
      * a method used to check if a customer exists in the database by email.
      * @param email - the email of the customer to be found.
-     * @return
+     * @return true if a customer matching the email found in the database, false otherwise.
      */
     boolean existsByEmail(String email);
 
@@ -32,7 +32,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     
     /**
-     * a method used to delete coupon purchases from the customers_coupons table .
+     * a method used to delete coupon purchases from the customers_coupons table.
      * @param customerId - the id of the customer whose purchases are to be deleted.
      */
     @Transactional

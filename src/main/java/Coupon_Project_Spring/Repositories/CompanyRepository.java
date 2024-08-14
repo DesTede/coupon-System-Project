@@ -19,6 +19,7 @@ public interface CompanyRepository extends JpaRepository<Company, Integer> {
      */
     boolean existsByEmailOrName(String email, String name);
 
+    
     /**
      * this method is used to find a company in the database using the email and password entered.
      * @param email - a String parameter one has to enter to compare with the database.

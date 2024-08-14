@@ -26,13 +26,12 @@ import java.util.Set;
 @Table(name = "coupons")
 @Data
 @NoArgsConstructor
-public class Coupon {
+public class Coupon{
     
     @Id
     @Setter(AccessLevel.NONE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
     
     @ManyToOne
     private Company company;
@@ -46,7 +45,6 @@ public class Coupon {
     private LocalDate startDate;
     private LocalDate endDate;
     private double price;
-    
     @ManyToMany(mappedBy = "coupons", fetch = FetchType.EAGER)
     private Set<Customer> customers;
 
@@ -72,7 +70,7 @@ public class Coupon {
         this.startDate = startDate;
         this.endDate = endDate;
         this.price = price;
-        this.customers = new HashSet<>(); // i want to add here an empty set of customers, so that whenever i create a coupon, it will be created with an empty set of customers
+        this.customers = new HashSet<>(); // I want to add here an empty set of customers, so that whenever I create a coupon, it will be created with an empty set of customers
         
     }
 
@@ -122,42 +120,6 @@ public class Coupon {
     }
 }
 
-//
-//public class CustomDateDeserializer
-//        extends StdDeserializer<Date> {
-//
-//    private static SimpleDateFormat formatter
-//            = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
-//
-//    public CustomDateDeserializer() {
-//        this(null);
-//    }
-//
-//    public CustomDateDeserializer(Class<?> vc) {
-//        super(vc);
-//    }
-//
-
-
-//    @Override
-//    public Date deserialize(
-//            JsonParser jsonparser, DeserializationContext context)
-//            throws IOException {
-//
-//        String date = jsonparser.getText();
-//        try {
-//            return formatter.parse(date);
-//        } catch (ParseException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
-//
-//    public class EventWithSerializer {
-//        public String name;
-//
-//        @JsonDeserialize(using = CustomDateDeserializer.class)
-//        public Date eventDate;
-//    }
 
 
 

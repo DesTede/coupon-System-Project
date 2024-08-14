@@ -95,6 +95,7 @@ public class LoginController {
     
     /**
      * This method creates a token for the user.
+     * It receives the user's service and creates a token with the user's details.
      * @param service the user's service
      * @return the token
      * @throws CompanyNotFoundException if the company not found

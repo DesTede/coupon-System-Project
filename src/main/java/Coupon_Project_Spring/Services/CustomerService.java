@@ -107,25 +107,6 @@ public class CustomerService extends ClientService{
      * @throws CouponAlreadyPurchasedException - custom exception when a coupon you're trying to purchase is already purchased.
      * @throws CouponsOutOfStockException - custom exception when a coupon you're trying to purchase is out of stock.
      */
-//    public Coupon purchaseCoupon(Coupon coupon) throws CouponExpiredException, CouponAlreadyPurchasedException, CouponsOutOfStockException, CustomerNotFoundException {
-//        Customer customer = getCustomerDetails();
-//        Company company = coupon.getCompany();
-//        if (coupon.getEndDate().isBefore(LocalDate.now()))
-//            throw new CouponExpiredException("The coupon you are trying to purchase is expired");
-//        if (customer.getCoupons().stream().anyMatch(c->c.getId() == coupon.getId()))
-//            throw new CouponAlreadyPurchasedException("Coupon already purchased");
-//        if (coupon.getAmount() == 0)
-//            throw new CouponsOutOfStockException("Coupon is out of stock");
-//        customer.getCoupons().add(coupon);
-//        coupon.setAmount(coupon.getAmount()-1);
-//        if (couponRepo.existsById(coupon.getId())){
-//            coupon.setCompany(company);
-//            couponRepo.save(coupon);
-//        }
-//
-//        customerRepo.save(customer);
-//        return coupon;
-//    }
 
     public Coupon purchaseCoupon(int couponId) throws CouponExpiredException, CouponAlreadyPurchasedException, CouponsOutOfStockException, CustomerNotFoundException {
         Coupon coupon = couponRepo.findById(couponId).orElseThrow();
