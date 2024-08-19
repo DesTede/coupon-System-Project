@@ -20,10 +20,10 @@ cd coupon-System-Project_frontend
 4.	#### Frontend Setup
 
 o Install dependencies
-    npm install
+            npm install
 
 o	Start the frontend server
-    npm start
+            npm start
 
 ## Usage
 
